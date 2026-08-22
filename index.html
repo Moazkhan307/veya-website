@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VEYA — Everything You Want. One Place.</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0b0b0d;
+      --dark: #151518;
+      --gray: #777;
+      --light: #f6f6f6;
+      --white: #fff;
+      --accent: #635bff;
+      --border: #e8e8e8;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--black);
+      background: var(--white);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* NAVBAR */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      gap: 25px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #222;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search {
+      width: 190px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: var(--accent);
+    }
+
+    .cart-btn {
+      border: 0;
+      background: var(--black);
+      color: white;
+      border-radius: 30px;
+      padding: 11px 17px;
+      font-weight: 700;
+    }
+
+    /* HERO */
+
+    .hero {
+      background:
+        radial-gradient(circle at 80% 20%, #817bff55, transparent 30%),
+        linear-gradient(135deg, #f6f6f6, #ffffff);
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      max-width: 750px;
+      font-size: clamp(50px, 8vw, 92px);
+      line-height: .92;
+      letter-spacing: -5px;
+      margin-bottom: 25px;
+    }
+
+    .hero p {
+      max-width: 560px;
+      color: #666;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .primary {
+      background: var(--black);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+    .secondary {
+      background: white;
+      color: var(--black);
+      border: 1px solid #ddd;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+    /* SECTIONS */
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 80px 20px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 35px;
+      gap: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 38px;
+      letter-spacing: -1.5px;
+    }
+
+    .section-heading p {
+      color: var(--gray);
+    }
+
+    /* CATEGORIES */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .category {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      min-height: 170px;
+      background: #fafafa;
+      transition: .25s;
+    }
+
+    .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.08);
+    }
+
+    .category-icon {
+      font-size: 38px;
+      margin-bottom: 20px;
+    }
+
+    .category h3 {
+      margin-bottom: 7px;
+    }
+
+    .category p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* PRODUCTS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: white;
+      transition: .25s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.08);
+    }
+
+    .product-image {
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f4;
+      font-size: 85px;
+    }
+
+    .product-info {
+      padding: 18px;
+    }
+
+    .product-category {
+      color: var(--gray);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .product h3 {
+      margin: 7px 0;
+      font-size: 17px;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .price {
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .add {
+      border: none;
+      background: var(--black);
+      color: white;
+      padding: 9px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* PROMO */
+
+    .promo {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    .promo-box {
+      background: var(--black);
+      color: white;
+      border-radius: 30px;
+      padding: 55px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .promo-box h2 {
+      font-size: 45px;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .promo-box p {
+      color: #aaa;
+    }
+
+    .promo-box button {
+      background: white;
+      color: black;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+    /* WHY VEYA */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      padding: 30px;
+      background: #f7f7f7;
+      border-radius: 20px;
+    }
+
+    .feature-icon {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .feature p {
+      color: var(--gray);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: var(--black);
+      color: white;
+      padding: 60px 20px 25px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 50px;
+    }
+
+    .footer-logo {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    footer p {
+      color: #999;
+      line-height: 1.6;
+    }
+
+    footer h4 {
+      margin-bottom: 15px;
+    }
+
+    footer a {
+      display: block;
+      color: #999;
+      text-decoration: none;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .copyright {
+      border-top: 1px solid #292929;
+      padding-top: 20px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* CART */
+
+    .cart-panel {
+      position: fixed;
+      right: -420px;
+      top: 0;
+      width: 400px;
+      height: 100vh;
+      background: white;
+      z-index: 2000;
+      box-shadow: -10px 0 40px rgba(0,0,0,.15);
+      transition: .3s;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-panel.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+    .close-cart {
+      border: none;
+      background: #eee;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item-icon {
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f4;
+      border-radius: 12px;
+      font-size: 25px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-info h4 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-info span {
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    .remove {
+      border: none;
+      background: transparent;
+      color: #e33;
+      font-size: 12px;
+    }
+
+    .cart-total {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .checkout {
+      width: 100%;
+      background: var(--black);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--gray);
+      padding-top: 60px;
+    }
+
+    /* OVERLAY */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      z-index: 1500;
+      display: none;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* MOBILE */
+
+    @media(max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .search {
+        width: 140px;
+      }
+
+      .categories,
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .nav {
+        height: 65px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .search {
+        display: none;
+      }
+
+      .hero {
+        min-height: 500px;
+      }
+
+      .hero h1 {
+        font-size: 54px;
+        letter-spacing: -3px;
+      }
+
+      section {
+        padding: 55px 15px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading h2 {
+        font-size: 30px;
+        margin-bottom: 8px;
+      }
+
+      .categories,
+      .products,
+      .features,
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        height: 220px;
+      }
+
+      .promo {
+        padding: 0 15px 55px;
+      }
+
+      .promo-box {
+        padding: 35px 25px;
+        display: block;
+      }
+
+      .promo-box h2 {
+        font-size: 34px;
+      }
+
+      .promo-box button {
+        margin-top: 25px;
+      }
+
+      .cart-panel {
+        width: 100%;
+        right: -100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <header>
+    <nav class="nav">
+
+      <div class="logo">VEYA</div>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#products">Shop</a></li>
+        <li><a href="#deals">Deals</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <input
+          id="searchInput"
+          class="search"
+          type="search"
+          placeholder="Search products..."
+        >
+
+        <button class="cart-btn" onclick="openCart()">
+          🛒 Cart <span id="cartCount">0</span>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+
+  <main id="home">
+
+    <div class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">Welcome to VEYA</div>
+
+        <h1>Everything You Want. One Place.</h1>
+
+        <p>
+          Discover stylish essentials, everyday technology and products
+          made for your lifestyle — all in one place.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="primary"
+                  onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+            Shop Now
+          </button>
+
+          <button class="secondary"
+                  onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">
+            Explore Categories
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CATEGORIES -->
+
+    <section id="categories">
+
+      <div class="section-heading">
+        <div>
+          <h2>Shop by Category</h2>
+          <p>Find what you need, faster.</p>
+        </div>
+      </div>
+
+      <div class="categories">
+
+        <div class="category">
+          <div class="category-icon">👟</div>
+          <h3>Shoes</h3>
+          <p>Everyday styles made for you.</p>
+        </div>
+
+        <div class="category">
+          <div class="category-icon">📱</div>
+          <h3>Phone Covers</h3>
+          <p>Protect your phone in style.</p>
+        </div>
+
+        <div class="category">
+          <div class="category-icon">👕</div>
+          <h3>T-Shirts</h3>
+          <p>Simple, comfortable and stylish.</p>
+        </div>
+
+        <div class="category">
+          <div class="category-icon">🎧</div>
+          <h3>Audio</h3>
+          <p>Wireless earbuds and more.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+
+    <section id="products">
+
+      <div class="section-heading">
+        <div>
+          <h2>Featured Products</h2>
+          <p>Our current favorites.</p>
+        </div>
+      </div>
+
+      <div class="products" id="productGrid">
+
+        <!-- Product 1 -->
+
+        <div class="product" data-name="VEYA Street Runner Shoes">
+
+          <div class="product-image">👟</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Shoes</span>
+
+            <h3>VEYA Street Runner</h3>
+
+            <div class="product-bottom">
+              <span class="price">$39.99</span>
+
+              <button class="add"
+                onclick="addToCart('VEYA Street Runner',39.99,'👟')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Product 2 -->
+
+        <div class="product" data-name="Premium Phone Cover">
+
+          <div class="product-image">📱</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Phone Covers</span>
+
+            <h3>Premium Phone Cover</h3>
+
+            <div class="product-bottom">
+              <span class="price">$12.99</span>
+
+              <button class="add"
+                onclick="addToCart('Premium Phone Cover',12.99,'📱')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Product 3 -->
+
+        <div class="product" data-name="VEYA Essential T-Shirt">
+
+          <div class="product-image">👕</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Fashion</span>
+
+            <h3>VEYA Essential T-Shirt</h3>
+
+            <div class="product-bottom">
+              <span class="price">$19.99</span>
+
+              <button class="add"
+                onclick="addToCart('VEYA Essential T-Shirt',19.99,'👕')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Product 4 -->
+
+        <div class="product" data-name="VEYA Wireless Earbuds">
+
+          <div class="product-image">🎧</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Audio</span>
+
+            <h3>VEYA Wireless Earbuds</h3>
+
+            <div class="product-bottom">
+              <span class="price">$29.99</span>
+
+              <button class="add"
+                onclick="addToCart('VEYA Wireless Earbuds',29.99,'🎧')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Product 5 -->
+
+        <div class="product" data-name="VEYA Classic Sneakers">
+
+          <div class="product-image">👟</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Shoes</span>
+
+            <h3>VEYA Classic Sneakers</h3>
+
+            <div class="product-bottom">
+              <span class="price">$44.99</span>
+
+              <button class="add"
+                onclick="addToCart('VEYA Classic Sneakers',44.99,'👟')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Product 6 -->
+
+        <div class="product" data-name="Clear Shockproof Cover">
+
+          <div class="product-image">📱</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Phone Covers</span>
+
+            <h3>Clear Shockproof Cover</h3>
+
+            <div class="product-bottom">
+              <span class="price">$9.99</span>
+
+              <button class="add"
+                onclick="addToCart('Clear Shockproof Cover',9.99,'📱')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Product 7 -->
+
+        <div class="product" data-name="Oversized VEYA Tee">
+
+          <div class="product-image">👕</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Fashion</span>
+
+            <h3>Oversized VEYA Tee</h3>
+
+            <div class="product-bottom">
+              <span class="price">$24.99</span>
+
+              <button class="add"
+                onclick="addToCart('Oversized VEYA Tee',24.99,'👕')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Product 8 -->
+
+        <div class="product" data-name="VEYA Pro Earbuds">
+
+          <div class="product-image">🎧</div>
+
+          <div class="product-info">
+
+            <span class="product-category">Audio</span>
+
+            <h3>VEYA Pro Earbuds</h3>
+
+            <div class="product-bottom">
+              <span class="price">$49.99</span>
+
+              <button class="add"
+                onclick="addToCart('VEYA Pro Earbuds',49.99,'🎧')">
+                Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DEAL -->
+
+    <div class="promo" id="deals">
+
+      <div class="promo-box">
+
+        <div>
+          <h2>Fresh Finds.<br>Better Prices.</h2>
+          <p>Discover something new at VEYA.</p>
+        </div>
+
+        <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+          Shop Deals →
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- WHY VEYA -->
+
+    <section>
+
+      <div class="section-heading">
+        <div>
+          <h2>Why VEYA?</h2>
+          <p>Shopping made simple.</p>
+        </div>
+      </div>
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">✨</div>
+          <h3>Quality Products</h3>
+          <p>
+            We focus on products that combine style, usefulness and value.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🚚</div>
+          <h3>Easy Shopping</h3>
+          <p>
+            Find your favorites quickly with a simple and modern shopping experience.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">❤️</div>
+          <h3>Made for You</h3>
+          <p>
+            VEYA brings everyday products together in one convenient place.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <div>
+          <div class="footer-logo">VEYA</div>
+
+          <p>
+            Everything You Want. One Place.
+            <br>
+            Your everyday shopping destination.
+          </p>
+        </div>
+
+        <div>
+          <h4>Shop</h4>
+          <a href="#products">All Products</a>
+          <a href="#categories">Shoes</a>
+          <a href="#categories">Phone Covers</a>
+          <a href="#categories">T-Shirts</a>
+        </div>
+
+        <div>
+          <h4>Help</h4>
+          <a href="#">Contact Us</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+          <a href="#">FAQ</a>
+        </div>
+
+        <div>
+          <h4>VEYA</h4>
+          <a href="#">About Us</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © 2026 VEYA. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- CART -->
+
+  <div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+  <aside class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+
+      <h2>Your Cart</h2>
+
+      <button class="close-cart" onclick="closeCart()">✕</button>
+
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <div class="empty">Your cart is empty.</div>
+    </div>
+
+    <div class="cart-total">
+
+      <div class="total-row">
+        <span>Total</span>
+        <span>$<span id="cartTotal">0.00</span></span>
+      </div>
+
+      <button class="checkout" onclick="checkout()">
+        Checkout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <script>
+
+    let cart = [];
+
+    /* ADD TO CART */
+
+    function addToCart(name, price, icon) {
+
+      const existing = cart.find(item => item.name === name);
+
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({
+          name,
+          price,
+          icon,
+          quantity: 1
+        });
+      }
+
+      updateCart();
+
+      openCart();
+    }
+
+
+    /* UPDATE CART */
+
+    function updateCart() {
+
+      const cartItems = document.getElementById("cartItems");
+      const cartCount = document.getElementById("cartCount");
+      const cartTotal = document.getElementById("cartTotal");
+
+      cartItems.innerHTML = "";
+
+      let total = 0;
+      let count = 0;
+
+      if (cart.length === 0) {
+
+        cartItems.innerHTML =
+          '<div class="empty">Your cart is empty.</div>';
+
+      }
+
+      cart.forEach((item, index) => {
+
+        total += item.price * item.quantity;
+        count += item.quantity;
+
+        const div = document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = `
+
+          <div class="cart-item-icon">
+            ${item.icon}
+          </div>
+
+          <div class="cart-item-info">
+
+            <h4>${item.name}</h4>
+
+            <span>
+              $${item.price.toFixed(2)}
+              × ${item.quantity}
+            </span>
+
+          </div>
+
+          <button
+            class="remove"
+            onclick="removeFromCart(${index})">
+            Remove
+          </button>
+
+        `;
+
+        cartItems.appendChild(div);
+
+      });
+
+      cartCount.textContent = count;
+
+      cartTotal.textContent = total.toFixed(2);
+
+    }
+
+
+    /* REMOVE */
+
+    function removeFromCart(index) {
+
+      cart.splice(index, 1);
+
+      updateCart();
+
+    }
+
+
+    /* OPEN CART */
+
+    function openCart() {
+
+      document
+        .getElementById("cartPanel")
+        .classList.add("open");
+
+      document
+        .getElementById("overlay")
+        .classList.add("show");
+
+    }
+
+
+    /* CLOSE CART */
+
+    function closeCart() {
+
+      document
+        .getElementById("cartPanel")
+        .classList.remove("open");
+
+      document
+        .getElementById("overlay")
+        .classList.remove("show");
+
+    }
+
+
+    /* CHECKOUT */
+
+    function checkout() {
+
+      if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+
+      }
+
+      alert(
+        "Thank you for shopping with VEYA! " +
+        "Online checkout will be connected soon."
+      );
+
+    }
+
+
+    /* SEARCH */
+
+    document
+      .getElementById("searchInput")
+      .addEventListener("input", function() {
+
+        const search = this.value.toLowerCase();
+
+        document
+          .querySelectorAll(".product")
+          .forEach(product => {
+
+            const name =
+              product.dataset.name.toLowerCase();
+
+            product.style.display =
+              name.includes(search)
+                ? ""
+                : "none";
+
+          });
+
+      });
+
+  </script>
+
+</body>
+</html>
